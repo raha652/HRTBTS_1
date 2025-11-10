@@ -58,10 +58,24 @@ function loginSuccess(username) {
 const urlParams = new URLSearchParams(window.location.search);
 const base = urlParams.get("base") || "BTS_1";  // پیش‌فرض BTS_1
 
+// 🟢 وقتی فرم نمایش داده می‌شود، مقدار employee_id را از کاربر لاگین‌شده تنظیم کن
 document.getElementById("formBtn").addEventListener("click", () => {
+  const username = localStorage.getItem("technician_username");
+  const empField = document.getElementById("employee_id");
+  
+  // نمایش فرم
   document.getElementById("reportForm").classList.remove("hidden");
   document.getElementById("uploadForm").classList.add("hidden");
+
+  // پر کردن و قفل کردن فیلد ایدی
+  if (empField && username) {
+    empField.value = username;
+    empField.readOnly = true;
+    empField.style.backgroundColor = "#f0f0f0";
+    empField.style.cursor = "not-allowed";
+  }
 });
+
 
 document.getElementById("uploadBtn").addEventListener("click", () => {
   document.getElementById("uploadForm").classList.remove("hidden");
@@ -180,3 +194,4 @@ function resetProgressUI() {
   document.getElementById("uploadProgress").value = 0;
   document.getElementById("progressText").textContent = "";
 }
+
