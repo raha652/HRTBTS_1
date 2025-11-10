@@ -2,24 +2,27 @@
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbwXGFd3p2DFyy4TzwbGu0lBwGzJAsi7z9ZcO8wlFEu9b_mQwp9Sq0Jm0JxORjto70KSrQ/exec";
 
 // 🔗 اطلاعات تلگرام
-const BOT_TOKEN = "7707386830:AAFa_jXzCuYnKCoFcXp9yFIGdiwtGlc0XRo";
+const BOT_TOKEN = "8249834114:AAE8N23oUkHLQmBemZ83CQD-fXgbLNAi7b4";
 const CHAT_ID = "-1001867257289"; // آیدی گروه
 const THREAD_ID = 2; // آیدی تاپیک
 
 // لیست کاربران (می‌توانید این لیست را به دلخواه تغییر دهید)
 const USERS = {
   "1806": "18",
-  "1765": "sarwari",
-  "1807": "ehsan",
-  "1605": "n@m",
-  "1568": "t#sh",
-  "1613": "m#m",
-  "1761": "1761",
-  "1831": "s%h",
-  "1865": "h$m",
-  "1867": "w@b",
-  "1869": "r*m",
-  "qafori": "b@9",
+  "1765": "1",
+  "1807": "1",
+  "1605": "nm",
+  "1568": "tsh",
+  "1613": "m@m",
+  "1831": "sh",
+  "1865": "hm",
+  "1869": "mr",
+  "1872": "qafori",
+  "1892": "az",
+  "1893": "sa",
+  "1850": "nh",
+  "1781": "zs",
+  "1826": "rabbani",
   "user450": "us"
 };
 
@@ -173,6 +176,7 @@ function resetProgressUI() {
   document.getElementById("uploadProgress").value = 0;
   document.getElementById("progressText").textContent = "";
 }
+
 
 
 
