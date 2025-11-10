@@ -42,11 +42,16 @@ function loginSuccess(username) {
   // مخفی کردن بخش ورود و نمایش محتوای اصلی
   document.getElementById("loginContainer").classList.add("hidden");
   document.getElementById("mainContent").classList.remove("hidden");
-  document.getElementById("logoutBtn").classList.remove("hidden");
   
   // تنظیم خودکار فیلد تکنسین در فرم گزارش
   document.getElementById("technician").value = username;
+
+  // 🟢 تنظیم خودکار فیلد ID از نام کاربری و readonly کردن آن
+  const idField = document.getElementById("employee_id");
+  idField.value = username;
+  idField.readOnly = true;
 }
+
 
 
 // گرفتن مقدار base از URL؛ اگر فیلد base هم در فرم نباشد، این مقدار از URL گرفته می‌شود
@@ -85,6 +90,8 @@ document.getElementById("reportForm").addEventListener("submit", function (e) {
       this.reset();
       // حفظ نام تکنسین پس از ریست فرم
       document.getElementById("technician").value = localStorage.getItem("technician_username");
+      document.getElementById("employee_id").value = savedUsername;
+      document.getElementById("employee_id").readOnly = true;
     })
     .catch(err => {
       console.error(err);
@@ -166,3 +173,4 @@ function resetProgressUI() {
   document.getElementById("uploadProgress").value = 0;
   document.getElementById("progressText").textContent = "";
 }
+
