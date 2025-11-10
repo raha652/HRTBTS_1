@@ -81,19 +81,22 @@ document.getElementById("reportForm").addEventListener("submit", function (e) {
     base: base  // از URL گرفته می‌شود
   });
   
-  fetch(`${SHEET_URL}?${params.toString()}`)
-    .then(res => res.text())
-    .then(responseText => {
-      document.getElementById("formStatus").textContent = "✅ " + responseText;
-      this.reset();
-      // حفظ نام تکنسین پس از ریست فرم
-      document.getElementById("employee_id").value = savedUsername;
-      document.getElementById("employee_id").readOnly = true;
-    })
-    .catch(err => {
-      console.error(err);
-      document.getElementById("formStatus").textContent = "❌ خطا در ارسال.";
-    });
+fetch(`${SHEET_URL}?${params.toString()}`)
+  .then(res => res.text())
+  .then(responseText => {
+    document.getElementById("formStatus").textContent = "✅ " + responseText;
+    this.reset();
+    // 🟢 حفظ نام تکنسین و آیدی پس از ریست فرم
+    const savedUsername = localStorage.getItem("technician_username");
+    document.getElementById("technician").value = savedUsername;
+    document.getElementById("employee_id").value = savedUsername;
+    document.getElementById("employee_id").readOnly = true;
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("formStatus").textContent = "❌ خطا در ارسال.";
+  });
+
 });
 
 // ارسال فایل به تلگرام
@@ -170,5 +173,6 @@ function resetProgressUI() {
   document.getElementById("uploadProgress").value = 0;
   document.getElementById("progressText").textContent = "";
 }
+
 
 
