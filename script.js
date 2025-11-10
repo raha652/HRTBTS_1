@@ -23,6 +23,8 @@ const USERS = {
   "user450": "us"
 };
 
+
+
 // فرم ورود
 document.getElementById("loginForm").addEventListener("submit", function (e) {
   e.preventDefault();
@@ -44,38 +46,17 @@ function loginSuccess(username) {
   
   // تنظیم خودکار فیلد تکنسین در فرم گزارش
   document.getElementById("technician").value = username;
-
-  // 🟢 تنظیم خودکار فیلد آی‌دی کارمند با نام کاربری و غیرفعال‌سازی آن
-  const empField = document.getElementById("employee_id");
-  if (empField) {
-    empField.value = username;
-    empField.readOnly = true; // غیرقابل تغییر کردن
-    empField.style.backgroundColor = "#f0f0f0"; // رنگ خنثی برای نمایش readonly
-  }
 }
+
 
 // گرفتن مقدار base از URL؛ اگر فیلد base هم در فرم نباشد، این مقدار از URL گرفته می‌شود
 const urlParams = new URLSearchParams(window.location.search);
 const base = urlParams.get("base") || "BTS_1";  // پیش‌فرض BTS_1
 
-// 🟢 وقتی فرم نمایش داده می‌شود، مقدار employee_id را از کاربر لاگین‌شده تنظیم کن
 document.getElementById("formBtn").addEventListener("click", () => {
-  const username = localStorage.getItem("technician_username");
-  const empField = document.getElementById("employee_id");
-  
-  // نمایش فرم
   document.getElementById("reportForm").classList.remove("hidden");
   document.getElementById("uploadForm").classList.add("hidden");
-
-  // پر کردن و قفل کردن فیلد ایدی
-  if (empField && username) {
-    empField.value = username;
-    empField.readOnly = true;
-    empField.style.backgroundColor = "#f0f0f0";
-    empField.style.cursor = "not-allowed";
-  }
 });
-
 
 document.getElementById("uploadBtn").addEventListener("click", () => {
   document.getElementById("uploadForm").classList.remove("hidden");
@@ -102,17 +83,8 @@ document.getElementById("reportForm").addEventListener("submit", function (e) {
     .then(responseText => {
       document.getElementById("formStatus").textContent = "✅ " + responseText;
       this.reset();
-
       // حفظ نام تکنسین پس از ریست فرم
-      const username = localStorage.getItem("technician_username");
-      document.getElementById("technician").value = username;
-
-      // 🟢 بازگرداندن خودکار employee_id پس از ریست
-      const empField = document.getElementById("employee_id");
-      if (empField) {
-        empField.value = username;
-        empField.readOnly = true;
-      }
+      document.getElementById("technician").value = localStorage.getItem("technician_username");
     })
     .catch(err => {
       console.error(err);
@@ -194,4 +166,3 @@ function resetProgressUI() {
   document.getElementById("uploadProgress").value = 0;
   document.getElementById("progressText").textContent = "";
 }
-
